@@ -1,0 +1,16 @@
+<div [routerLink]="['/page-produit', product?.id]" class="card produit-card">
+  <div class="card-header">
+    <span class="badge badge-pill badge-{{ product?.quantite! > product?.pas! ? 'success' : 'danger' }}">
+      {{ product?.quantite! > product?.pas! ? 'en stock' : 'épuisé' }}
+    </span>
+    <span style="float: right">
+      <span style="font-weight: bold">{{ product?.prix!.toFixed(2) }}€</span>
+      <span class="badge badge-pill badge-info">{{ product?.vendableUnite == true ? '/unité' : '/kilo' }}</span>
+    </span>
+  </div>
+  <!-- Grayscale out of stock product images -->
+  <img class="card-img-top produit-image mx-auto {{ product?.quantite! > product?.pas! ? '' : 'grayout' }}" src="{{ product?.image! }}" />
+  <div class="card-header">
+    <span class="card-title produit-titre">{{ product?.nom }}</span>
+  </div>
+</div>

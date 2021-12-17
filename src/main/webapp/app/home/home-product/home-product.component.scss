@@ -1,0 +1,24 @@
+.produit-card {
+  width: 18rem;
+  margin: 1em;
+  cursor: pointer;
+}
+
+.produit-titre {
+  font-size: large;
+  font-weight: bold;
+}
+
+.produit-image {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.grayout {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  filter: grayscale(100%);
+}

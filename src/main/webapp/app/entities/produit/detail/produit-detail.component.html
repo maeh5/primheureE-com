@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="produit">
+      <h2 data-cy="produitDetailsHeading"><span>Produit</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ produit.id }}</span>
+        </dd>
+        <dt><span>Nom</span></dt>
+        <dd>
+          <span>{{ produit.nom }}</span>
+        </dd>
+        <dt><span>Vendable Unite</span></dt>
+        <dd>
+          <span>{{ produit.vendableUnite }}</span>
+        </dd>
+        <dt><span>Prix</span></dt>
+        <dd>
+          <span>{{ produit.prix }}</span>
+        </dd>
+        <dt><span>Quantite</span></dt>
+        <dd>
+          <span>{{ produit.quantite }}</span>
+        </dd>
+        <dt><span>Pas</span></dt>
+        <dd>
+          <span>{{ produit.pas }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ produit.description }}</span>
+        </dd>
+        <dt><span>Provenance</span></dt>
+        <dd>
+          <span>{{ produit.provenance }}</span>
+        </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+          <span>{{ produit.image }}</span>
+        </dd>
+        <dt><span>Saison</span></dt>
+        <dd>
+          <span>{{ produit.saison }}</span>
+        </dd>
+        <dt><span>Numero Version</span></dt>
+        <dd>
+          <span>{{ produit.numeroVersion }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/produit', produit.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

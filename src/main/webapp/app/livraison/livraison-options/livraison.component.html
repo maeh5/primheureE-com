@@ -1,0 +1,152 @@
+<div *ngIf="this.userExtra">
+  <div *ngIf="!isValid && !isConfirm">
+    <div class="row justify-content-center">
+      <h1 data-cy="livraisonTitle">Options de livraison</h1>
+    </div>
+  </div>
+
+  <div *ngIf="isValid && !isConfirm">
+    <div class="row justify-content-center">
+      <h1 data-cy="validationTitle">Confirmation de votre commande</h1>
+    </div>
+  </div>
+
+  <div *ngIf="isValid && isConfirm">
+    <div class="row justify-content-center">
+      <h1 data-cy="validationTitle">Votre commande a bien été enregistrée, merci!</h1>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div *ngIf="!isValid && !isConfirm">
+        <form name="form" role="form" (ngSubmit)="livraison()" [formGroup]="livraisonForm">
+          <label class="form-control-label" for="adresse"><span class="font-weight-bold">Adresse de livraison</span></label>
+          <div class="form-group">
+            <select type="select" class="form-control" id="adresse" name="adresse" formControlName="adresse" data-cy="adresse">
+              <option *ngFor="let a of userExtra?.adresses!" [ngValue]="a">{{ a.adresse }} {{ a.ville }} {{ a.codePostal }}</option>
+            </select>
+
+            <div *ngIf="(userExtra?.adresses)![0] === undefined">
+              <small class="form-text text-danger"> Vous n'avez pas d'adresse ajoutée pour le moment. </small>
+              <button type="btn" class="btn btn-primary" (click)="completeAccount()" data-cy="Confirmer">Ajouter une adresse</button>
+            </div>
+          </div>
+
+          <br />
+
+          <label class="form-control-label" for="moyenPaiement"><span class="font-weight-bold">Moyen de paiement</span></label>
+          <div class="form-group">
+            <label class="form-control-label" for="PaiementLivraison">Paiement à la livraison</label>
+            <input
+              type="radio"
+              class=""
+              id="PaiementLivraison"
+              name="moyenPaiement"
+              value="PaiementLivraison"
+              formControlName="moyenPaiement"
+              data-cy="adresse"
+            />
+            <br />
+            <label class="form-control-label" for="PaiementCB">Paiement par carte bancaire</label>
+            <input
+              type="radio"
+              class=""
+              id="PaiementCB"
+              name="moyenPaiement"
+              value="PaiementCB"
+              formControlName="moyenPaiement"
+              data-cy="email"
+            />
+          </div>
+
+          <div *ngIf="livraisonForm.get('moyenPaiement')!.value === 'PaiementCB'" class="form-group">
+            <label class="form-control-label" for="carteBancaire"><span class="font-weight-bold">Carte bancaire utilisée</span></label>
+            <select
+              type="select"
+              class="form-control"
+              id="carteBancaire"
+              name="carteBancaire"
+              formControlName="carteBancaire"
+              data-cy="carteBancaire"
+            >
+              <option *ngFor="let cb of userExtra?.cartesBancaires!" [ngValue]="cb">{{ cb.numero }}</option>
+            </select>
+            <div *ngIf="(userExtra?.cartesBancaires)![0] === undefined">
+              <small class="form-text text-danger"> Vous n'avez pas de carte bancaire ajoutée pour le moment. </small>
+              <button type="btn" class="btn btn-primary" (click)="completeAccount()" data-cy="Confirmer">Ajouter une carte bancaire</button>
+            </div>
+          </div>
+
+          <br />
+
+          <label class="form-control-label" for="moyenPaiement"><span class="font-weight-bold">Adresse et heure de livraison</span></label>
+          <div class="input-group">
+            <input
+              class="form-control"
+              placeholder="Choisir une date de livraison"
+              name="dateLivraison"
+              formControlName="dateLivraison"
+              [minDate]="minDate"
+              [maxDate]="maxDate"
+              [readonly]="true"
+              ngbDatepicker
+              #d="ngbDatepicker"
+            />
+            <div class="input-group-append">
+              <a class="btn" (click)="d.toggle()">
+                <span>
+                  <fa-icon icon="calendar-alt"></fa-icon>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <ngb-timepicker
+              [minuteStep]="30"
+              formControlName="heureLivraison"
+              [readonlyInputs]="true"
+              (click)="checkHour()"
+            ></ngb-timepicker>
+            <small class="form-text text-danger" *ngIf="!isHourValid"> Les horaires de livraison vont de 8h00 à 19h30. </small>
+          </div>
+
+          <button
+            [disabled]="isHourValid === false || livraisonForm.invalid"
+            type="submit"
+            class="d-flex btn btn-primary ml-auto"
+            data-cy="submit"
+          >
+            Valider
+          </button>
+        </form>
+      </div>
+
+      <div *ngIf="isValid && !isConfirm">
+        <jhi-validation
+          [adresse]="livraisonForm.get('adresse')!.value"
+          [moyenPaiement]="livraisonForm.get('moyenPaiement')!.value"
+          [carteBancaire]="livraisonForm.get('carteBancaire')!.value"
+          [dateLivraison]="livraisonForm.get('dateLivraison')!.value"
+          [heureLivraison]="livraisonForm.get('heureLivraison')!.value"
+        >
+        </jhi-validation>
+
+        <br />
+        <div class="d-flex">
+          <button type="btn" class="btn btn-primary mr-auto" data-cy="Retour" (click)="isValid = false">Retour</button>
+          <button type="btn" class="btn btn-primary ml-auto" data-cy="Confirmer" (click)="confirmation()">Confirmer</button>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row justify-content-center" *ngIf="isValid && isConfirm">
+        <a class="btn" routerLink="/">
+          <button type="btn" class="btn btn-primary" data-cy="RetourSite">Retour au site</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

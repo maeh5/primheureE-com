@@ -1,0 +1,42 @@
+{
+  "name": "Commande",
+  "fields": [
+    {
+      "fieldName": "etat",
+      "fieldType": "EtatCommande",
+      "fieldValues": "ENCOURS,LIVRE"
+    },
+    {
+      "fieldName": "prixTotal",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "dateAchat",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "detailProduitCommande",
+      "otherEntityRelationshipName": "commande",
+      "relationshipName": "produits"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "userExtra",
+      "otherEntityRelationshipName": "histCommandes",
+      "relationshipName": "userExtra"
+    }
+  ],
+  "entityTableName": "commande",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211028121455"
+}

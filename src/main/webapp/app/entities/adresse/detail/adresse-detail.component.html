@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="adresse">
+      <h2 data-cy="adresseDetailsHeading"><span>Adresse</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ adresse.id }}</span>
+        </dd>
+        <dt><span>Adresse</span></dt>
+        <dd>
+          <span>{{ adresse.adresse }}</span>
+        </dd>
+        <dt><span>Code Postal</span></dt>
+        <dd>
+          <span>{{ adresse.codePostal }}</span>
+        </dd>
+        <dt><span>Ville</span></dt>
+        <dd>
+          <span>{{ adresse.ville }}</span>
+        </dd>
+        <dt><span>User Extra</span></dt>
+        <dd>
+          <div *ngIf="adresse.userExtra">
+            <a [routerLink]="['/user-extra', adresse.userExtra?.id, 'view']">{{ adresse.userExtra?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/adresse', adresse.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

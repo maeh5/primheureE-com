@@ -1,0 +1,231 @@
+<div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 *ngIf="account">
+        Paramètres pour <strong>{{ account.login }}</strong>
+      </h2>
+
+      <div class="alert alert-success" *ngIf="success">
+        <strong>Paramètres sauvegardés!</strong>
+      </div>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <form name="form" role="form" (ngSubmit)="save()" [formGroup]="settingsForm" *ngIf="account" novalidate>
+        <div class="form-group">
+          <label class="form-control-label" for="firstName">Prénom</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            placeholder="Votre prénom"
+            formControlName="firstName"
+            data-cy="firstname"
+          />
+
+          <div
+            *ngIf="
+              settingsForm.get('firstName')!.invalid && (settingsForm.get('firstName')!.dirty || settingsForm.get('firstName')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="settingsForm.get('firstName')?.errors?.required">
+              Votre prénom est obligatoire.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('firstName')?.errors?.minlength">
+              Votre prénom doit faire plus de 1 caractère.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('firstName')?.errors?.maxlength">
+              Votre prénom ne doit pas faire plus de 50 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="lastName">Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            placeholder="Votre nom"
+            formControlName="lastName"
+            data-cy="lastname"
+          />
+
+          <div
+            *ngIf="settingsForm.get('lastName')!.invalid && (settingsForm.get('lastName')!.dirty || settingsForm.get('lastName')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="settingsForm.get('lastName')?.errors?.required"> Votre nom est obligatoire. </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('lastName')?.errors?.minlength">
+              Votre nom doit faire plus de 1 caractère.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('lastName')?.errors?.maxlength">
+              Votre nom ne doit pas faire plus de 50 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Votre email"
+            formControlName="email"
+            data-cy="email"
+          />
+
+          <div *ngIf="settingsForm.get('email')!.invalid && (settingsForm.get('email')!.dirty || settingsForm.get('email')!.touched)">
+            <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.required"> Votre email est obligatoire. </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.email"> Votre email est invalide. </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.minlength">
+              Votre email doit faire plus de 5 caractères.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('email')?.errors?.maxlength">
+              Votre email ne doit pas faire plus de 100 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="adresse">Adresse</label>
+          <input
+            type="text"
+            class="form-control"
+            id="adresse"
+            name="adresse"
+            placeholder="Votre adresse"
+            formControlName="adresse"
+            data-cy="adresse"
+          />
+
+          <div *ngIf="settingsForm.get('adresse')!.invalid && (settingsForm.get('adresse')!.dirty || settingsForm.get('adresse')!.touched)">
+            <small class="form-text text-danger" *ngIf="settingsForm.get('adresse')?.errors?.required">
+              Votre adresse est obligatoire.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('adresse')?.errors?.adresse"> Votre adresse est invalide. </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('adresse')?.errors?.minlength">
+              Votre adresse doit faire plus de 5 caractères.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('adresse')?.errors?.maxlength">
+              Votre adresse ne doit pas faire plus de 200 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="codePostal">Code Postal</label>
+          <input
+            type="text"
+            class="form-control"
+            id="codePostal"
+            name="codePostal"
+            placeholder="Votre code postal"
+            formControlName="codePostal"
+            data-cy="codePostal"
+          />
+
+          <div
+            *ngIf="
+              settingsForm.get('codePostal')!.invalid && (settingsForm.get('codePostal')!.dirty || settingsForm.get('codePostal')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="settingsForm.get('codePostal')?.errors?.required">
+              Votre code postal est obligatoire.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('codePostal')?.errors?.codePostal">
+              Votre code postal est invalide.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('codePostal')?.errors?.minlength">
+              Votre code postal doit faire 5 caractères.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('codePostal')?.errors?.maxlength">
+              Votre code postal doit faire 5 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="ville">Ville</label>
+          <input
+            type="text"
+            class="form-control"
+            id="ville"
+            name="ville"
+            placeholder="Votre ville"
+            formControlName="ville"
+            data-cy="ville"
+          />
+
+          <div *ngIf="settingsForm.get('ville')!.invalid && (settingsForm.get('ville')!.dirty || settingsForm.get('ville')!.touched)">
+            <small class="form-text text-danger" *ngIf="settingsForm.get('ville')?.errors?.required"> Votre ville est obligatoire. </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('ville')?.errors?.ville"> Votre ville est invalide. </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('ville')?.errors?.minlength">
+              Votre ville doit faire plus de 5 caractères.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('ville')?.errors?.maxlength">
+              Votre ville ne doit faire plus de 200 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="carteBancaire">Carte Bancaire</label>
+          <input
+            type="text"
+            class="form-control"
+            id="carteBancaire"
+            name="carteBancaire"
+            placeholder="Votre carte bancaire"
+            formControlName="carteBancaire"
+            data-cy="carteBancaire"
+          />
+
+          <div
+            *ngIf="
+              settingsForm.get('carteBancaire')!.invalid &&
+              (settingsForm.get('carteBancaire')!.dirty || settingsForm.get('carteBancaire')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="settingsForm.get('carteBancaire')?.errors?.required">
+              Votre carte bancaire est obligatoire.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('carteBancaire')?.errors?.carteBancaire">
+              Votre carte bancaire est invalide.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('carteBancaire')?.errors?.minlength">
+              Votre carte bancaire doit faire 16 caractères.
+            </small>
+
+            <small class="form-text text-danger" *ngIf="settingsForm.get('carteBancaire')?.errors?.maxlength">
+              Votre carte bancaire doit faire 16 caractères.
+            </small>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-primary" data-cy="submit">Sauvegarder</button>
+      </form>
+    </div>
+  </div>
+</div>

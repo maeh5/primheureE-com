@@ -1,0 +1,64 @@
+{
+  "name": "Produit",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "vendableUnite",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "prix",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "quantite",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "pas",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "provenance",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "saison",
+      "fieldType": "Saison",
+      "fieldValues": "PRINTEMPS,ETE,AUTOMNE,HIVER"
+    },
+    {
+      "fieldName": "numeroVersion",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "categorie",
+      "otherEntityRelationshipName": "produit",
+      "relationshipName": "categories"
+    }
+  ],
+  "entityTableName": "produit",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211028121453"
+}

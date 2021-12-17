@@ -1,0 +1,43 @@
+{
+  "name": "UserExtra",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "userExtra",
+      "relationshipName": "user",
+      "ownerSide": true,
+      "useJPADerivedIdentifier": true,
+      "id": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "commande",
+      "otherEntityRelationshipName": "userExtra",
+      "relationshipName": "histCommandes"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "adresse",
+      "otherEntityRelationshipName": "userExtra",
+      "relationshipName": "adresses"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "carteBancaire",
+      "otherEntityRelationshipName": "userExtra",
+      "relationshipName": "cartesBancaires"
+    }
+  ],
+  "entityTableName": "user_extra",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211028121454"
+}

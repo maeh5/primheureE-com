@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col flex-col sidebar rounded border">
+    <div class="btn btn-outline-primary btn-block disabled">Filtrer</div>
+    <div [formGroup]="typeForm" (keydown.enter)="changeFiltre()">
+      <br />
+      <input
+        class="form-control"
+        id="searchInput"
+        name="searchInput"
+        placeholder="Rechercher..."
+        formControlName="searchInput"
+        data-cy="searchInput"
+      />
+      <br />
+      <h5>Type:</h5>
+      <select class="custom-select" formControlName="type">
+        <option *ngFor="let t of allTypes">{{ t }}</option>
+      </select>
+      <br /><br />
+      <button class="btn btn-primary btn-block" (click)="changeFiltre()">Appliquer</button>
+    </div>
+  </div>
+
+  <div class="col flex-col flex-grow">
+    <div class="row justify-content-center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><span class="page-link" (click)="changePage(this.currentPage - 1)">Précédent</span></li>
+          <div *ngFor="let num of allPage">
+            <li *ngIf="currentPage == num; else notActive" class="page-item active">
+              <span class="page-link" (click)="changePage(num)">{{ num + 1 }}</span>
+            </li>
+            <ng-template #notActive>
+              <li class="page-item">
+                <span class="page-link" (click)="changePage(num)">{{ num + 1 }}</span>
+              </li>
+            </ng-template>
+          </div>
+          <li class="page-item"><span class="page-link" (click)="changePage(this.currentPage + 1)">Suivant</span></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center">
+      <div *ngIf="allProduct?.length === 0">
+        <h3>Aucun produit ne correspond à votre recherche :(</h3>
+      </div>
+      <div *ngFor="let produit of allProduct">
+        <jhi-home-product [product]="produit"></jhi-home-product>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><span class="page-link" (click)="changePage(this.currentPage - 1)">Précédent</span></li>
+          <div *ngFor="let num of allPage">
+            <li *ngIf="currentPage == num; else notActive" class="page-item active">
+              <span class="page-link" (click)="changePage(num)">{{ num + 1 }}</span>
+            </li>
+            <ng-template #notActive>
+              <li class="page-item">
+                <span class="page-link" (click)="changePage(num)">{{ num + 1 }}</span>
+              </li>
+            </ng-template>
+          </div>
+          <li class="page-item"><span class="page-link" (click)="changePage(this.currentPage + 1)">Suivant</span></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

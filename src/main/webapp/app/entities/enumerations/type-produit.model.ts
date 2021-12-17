@@ -1,0 +1,27 @@
+export enum TypeProduit {
+  FRUIT = 'FRUIT',
+
+  LEGUME = 'LEGUME',
+
+  TUBERCULE = 'TUBERCULE',
+
+  CHAMPIGNON = 'CHAMPIGNON',
+
+  LEGUMINEUSE = 'LEGUMINEUSE',
+
+  SALADE = 'SALADE',
+
+  RACINE = 'RACINE',
+
+  AROMATE = 'AROMATE',
+
+  AGRUME = 'AGRUME',
+
+  EXOTIQUE = 'EXOTIQUE',
+
+  SEC = 'SEC',
+
+  ROUGE = 'ROUGE',
+
+  BIO = 'BIO',
+}

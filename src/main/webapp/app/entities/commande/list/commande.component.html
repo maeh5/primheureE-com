@@ -1,0 +1,88 @@
+<div>
+  <h2 id="page-heading" data-cy="CommandeHeading">
+    <span>Commandes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-commande"
+        [routerLink]="['/commande/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Commande </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="commandes?.length === 0">
+    <span>No commandes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="commandes && commandes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Etat</span></th>
+          <th scope="col"><span>Prix Total</span></th>
+          <th scope="col"><span>Date Achat</span></th>
+          <th scope="col"><span>User Extra</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let commande of commandes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/commande', commande.id, 'view']">{{ commande.id }}</a>
+          </td>
+          <td>{{ commande.etat }}</td>
+          <td>{{ commande.prixTotal }}</td>
+          <td>{{ commande.dateAchat | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="commande.userExtra">
+              <a [routerLink]="['/user-extra', commande.userExtra?.id, 'view']">{{ commande.userExtra?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/commande', commande.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/commande', commande.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(commande)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div>
+  <div>
+    <span class="font-weight-bold">Adresse de livraison</span><br />
+    <span>{{ adresse?.adresse }} {{ adresse?.ville }} {{ adresse?.codePostal }}</span>
+  </div>
+
+  <br />
+
+  <div>
+    <span class="font-weight-bold">Moyen de paiement</span><br />
+    <div *ngIf="moyenPaiement === 'PaiementLivraison'"><span>Paiement à la livraison</span><br /></div>
+
+    <div *ngIf="moyenPaiement === 'PaiementCB'">
+      <span>Paiement par carte bancaire</span><br />
+      <span class="font-weight-bold">Numéro de carte bancaire</span><br />
+      <span>{{ carteBancaire?.numero }}</span
+      ><br />
+    </div>
+
+    <span class="font-weight-bold">Prix Total</span><br />
+    <span>{{ getPrixTotal().toFixed(2) }}€</span><br />
+  </div>
+
+  <br />
+
+  <div>
+    <span class="font-weight-bold">Date et heure de livraison</span><br />
+    <div *ngIf="(heureLivraison?.minute! &lt; 10)">
+      <span>{{ dateLivraison }} à {{ heureLivraison?.hour }}h0{{ heureLivraison?.minute }}</span>
+    </div>
+    <div *ngIf="!(heureLivraison?.minute! &lt; 10)">
+      <span>{{ dateLivraison }} à {{ heureLivraison?.hour }}h{{ heureLivraison?.minute }}</span>
+    </div>
+  </div>
+</div>

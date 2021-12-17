@@ -1,0 +1,51 @@
+<h2>Mon Panier</h2>
+<div class="text-right">
+  <button type="btn" class="btn btn-primary btn-sm" [disabled]="getSize() === 0" routerLink="/livraison" routerLinkActive="active">
+    <fa-icon icon="receipt" [fixedWidth]="true"></fa-icon>
+    <span>Passer commande</span>
+  </button>
+  <br />
+  <h4>
+    <span class="badge badge-pill badge-secondary">Prix total: {{ getPrixTotal().toFixed(2) }}€</span>
+  </h4>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"><span>Produit</span></th>
+      <th scope="col"><span>Quantité</span></th>
+      <th scope="col"><span>Prix</span></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dp of produits">
+      <td>{{ dp?.produit?.nom }}</td>
+      <td>
+        <span>{{ dp?.quantite }}</span>
+        <span
+          class="badge badge-pill badge-info"
+          placement="right"
+          ngbTooltip="{{ dp?.produit?.vendableUnite == true ? 'unité' : 'gramme' }}"
+          >{{ dp?.produit?.vendableUnite == true ? 'u' : 'g' }}</span
+        >
+      </td>
+      <td>{{ dp?.prix!.toFixed(2) }} €</td>
+      <td class="text-right">
+        <button type="submit" (click)="deleteProduit(dp)" class="btn btn-danger btn-sm" data-cy="panierDelete">
+          <fa-icon icon="times"></fa-icon>
+          <span class="d-none d-md-inline">Supprimer</span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="text-right">
+  <h4>
+    <span class="badge badge-pill badge-secondary">Prix total: {{ getPrixTotal().toFixed(2) }}€</span>
+  </h4>
+  <button type="btn" class="btn btn-primary btn-sm" [disabled]="getSize() === 0" routerLink="/livraison" routerLinkActive="active">
+    <fa-icon icon="receipt" [fixedWidth]="true"></fa-icon>
+    <span>Passer commande</span>
+  </button>
+</div>

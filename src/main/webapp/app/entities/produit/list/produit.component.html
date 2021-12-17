@@ -1,0 +1,96 @@
+<div>
+  <h2 id="page-heading" data-cy="ProduitHeading">
+    <span>Produits</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-produit"
+        [routerLink]="['/produit/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Produit </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="produits?.length === 0">
+    <span>No produits found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="produits && produits.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Nom</span></th>
+          <th scope="col"><span>Vendable Unite</span></th>
+          <th scope="col"><span>Prix</span></th>
+          <th scope="col"><span>Quantite</span></th>
+          <th scope="col"><span>Pas</span></th>
+          <th scope="col"><span>Description</span></th>
+          <th scope="col"><span>Provenance</span></th>
+          <th scope="col"><span>Image</span></th>
+          <th scope="col"><span>Saison</span></th>
+          <th scope="col"><span>Numero Version</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produit of produits; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/produit', produit.id, 'view']">{{ produit.id }}</a>
+          </td>
+          <td>{{ produit.nom }}</td>
+          <td>{{ produit.vendableUnite }}</td>
+          <td>{{ produit.prix }}</td>
+          <td>{{ produit.quantite }}</td>
+          <td>{{ produit.pas }}</td>
+          <td>{{ produit.description }}</td>
+          <td>{{ produit.provenance }}</td>
+          <td>{{ produit.image }}</td>
+          <td>{{ produit.saison }}</td>
+          <td>{{ produit.numeroVersion }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/produit', produit.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/produit', produit.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(produit)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

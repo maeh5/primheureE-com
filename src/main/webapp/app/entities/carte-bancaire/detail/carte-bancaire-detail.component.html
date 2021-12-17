@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="carteBancaire">
+      <h2 data-cy="carteBancaireDetailsHeading"><span>Carte Bancaire</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ carteBancaire.id }}</span>
+        </dd>
+        <dt><span>Numero</span></dt>
+        <dd>
+          <span>{{ carteBancaire.numero }}</span>
+        </dd>
+        <dt><span>User Extra</span></dt>
+        <dd>
+          <div *ngIf="carteBancaire.userExtra">
+            <a [routerLink]="['/user-extra', carteBancaire.userExtra?.id, 'view']">{{ carteBancaire.userExtra?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/carte-bancaire', carteBancaire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
