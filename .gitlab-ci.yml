@@ -15,7 +15,7 @@ stages:
 before_script:
   - export NG_CLI_ANALYTICS="false"
   - export MAVEN_USER_HOME=`pwd`/.maven
-  - export HEROKU_API_KEY=444f3ed5-94d1-42e2-8992-60c5734ff832
+  - export HEROKU_API_KEY=#######################
 
 nohttp:
   stage: check
